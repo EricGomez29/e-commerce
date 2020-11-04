@@ -1,24 +1,23 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import axios from 'axios';
+import { BrowserRouter, Route } from "react-router-dom";
 import './App.css';
+import Catalogo from './Components/Productos/Catalogo';
+import NavBar from './Components/Nav';
 
 function App() {
+  const [resultados, setResultados] = useState([]);
+
+  async function onSearch(products) {
+    const result = await axios.get(`http://localhost:3001/api/search?q=${products}`)
+    setResultados(result.data.resultados)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter >
+      <NavBar onSearch={onSearch}/>
+      <Route exact path='/products/search' render = {() => <Catalogo products={resultados}/>}/>
+    </BrowserRouter>
   );
 }
 
