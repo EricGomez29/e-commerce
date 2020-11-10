@@ -7,13 +7,13 @@
 }
 
 .display {
-    margin-top: 100px;
+    margin-top: 30px;
     background-color: transparent;
     display: grid;
     grid-template-columns: 250px 250px 250px 250px;
     grid-gap: 30px;
     justify-content: center;
-    padding-top: 30px;
+    padding-top: 100px;
 }
 
 .productCard{
