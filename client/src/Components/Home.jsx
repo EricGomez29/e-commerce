@@ -16,7 +16,7 @@ export default function Home() {
                 </div>
                 <hr className="my-4" />
                 <p className="bg-secondary" >Puedes comenzar a buscar tus productos, marcas o más mediante la seccion de categorias o simplemente buscarlas, asi de simple !</p>
-                <p className="lead">
+                <p className="lead bg-secondary">
                     <NavLink className="btn btn-primary btn-lg" to='/products/categories' role="button" style={{width: "100%"}}>Ver categorias</NavLink>
                 </p>
             </div>

@@ -9,6 +9,7 @@ import Cards from './Components/Productos/Cards';
 import Filter from './Components/NavBar/FilterComponent';
 import Categorias from './Components/Productos/CategoriesComponent';
 import './App.css';
+import About from './Components/About';
 
 function App() {
   const [resultados, setResultados] = useState([]);
@@ -32,6 +33,7 @@ function App() {
       <NavBar onSearch={onSearch}/>
       <div className="App">
         <Route exact path='/' render = {() => <Home /> }/>
+        <Route exact path='/about' render = {() => <About /> }/>
         <Route exact path='/products/categories' render = {() => <Categorias /> }/>
         <Route path='/products/search' render = {() => <Filter />}/>
         <Route exact path='/products/search' render = {() => <Cards products={resultados}/>}/>

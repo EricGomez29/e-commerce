@@ -64,63 +64,97 @@ server.get('/search', (req, res) => {                                   //BUSCA 
 })
 
 server.get('/categories', (req, res) => {                               //BUSCA LAS CATEGORIAS GENERALES DE ML
-    axios.get('https://api.mercadolibre.com/sites/MLA/')
-    .then(data => {
-        var results = data.data.categories;
-        var total = results.length;
-        res.json({
-            categoriasTotales: total,
-            resultados: results
-        })
+
+    client.get("categories", (err, data) => {
+        if(data !== null) {
+            var cache = JSON.parse(data)
+            
+            res.json({
+                resultados: cache.resultados
+            })
+        } else {
+            axios.get('https://api.mercadolibre.com/sites/MLA/')
+                .then(data => {
+                    var results = data.data.categories;
+
+                    var cache = {
+                        resultados: results
+                    };
+
+                    client.setex("categories", 8000, JSON.stringify(cache))
+
+                    res.json({
+                        resultados: results
+                    })
+            })
+        }
     })
+
 })
 
 server.get('/categories/:name', (req, res) => {                         //BUSCA CATEGORIA GENERAL POR NOMBRE
     const name = req.params.name
-    /* 
-        Hago un replace por que cuando busco una categoria que lleva espacios como por ejemplo 
-        "Accesorios para Vehículos" por params me devuelve un string reemplazando los espacios por "%20" ej:  
-        "Accesorios%20para%20Vehículos" 
-    */
-    var nuevoName = name.replace('%20', ' ') //reemplazo el %20 por un " "
-    /*
-        Peticion a mi propia ruta para obtener las categorias y poder manipular los datos a mi gusto
-    */
-    axios.get(`http://localhost:3001/api/categories`)
-        .then(data => {
-            var results = data.data.resultados;
-            var arr = [];
-            //recorro el array que quedo guardado en la variable 'results' para poder pushear a la variable 'arr' solo el id de la categoria
-            for (let i = 0; i < results.length; i++) {
-                if( nuevoName === results[i].name ) {
-                    arr.push(results[i].id)
-                }
-            }
-            return arr
-        })
-        .then(name => {
-            const prods = axios.get(`https://api.mercadolibre.com/sites/MLA/search?category=${name}`)
-            return prods
-        }).then(products => {
-            var results = products.data.results;
-            var arr = [];
-            for (let i = 0; i < results.length; i++) {
-                arr.push({
-                    id: results[i].id,
-                    image: results[i].thumbnail,
-                    name: results[i].title,
-                    price: results[i].price,
-                    stock: results[i].available_quantity,
-                    sold: results[i].sold_quantity,
-                    condition: results[i].condition
-                })
-            };
+
+    client.get(name, (err, data) => {
+        if(data !== null) {
+            var cache = JSON.parse(data)
             res.json({
-                resultados: arr
+                resultados: cache.resultados
             })
-        }).catch(err => {
-            console.log('/categories/:name ERROR: ', err)
-        })           
+        } else {
+            /* 
+                Hago un replace por que cuando busco una categoria que lleva espacios como por ejemplo 
+                "Accesorios para Vehículos" por params me devuelve un string reemplazando los espacios por "%20" ej:  
+                "Accesorios%20para%20Vehículos" 
+            */
+            var nuevoName = name.replace('%20', ' ') //reemplazo el %20 por un " "
+            /*
+                Peticion a mi propia ruta para obtener las categorias y poder manipular los datos a mi gusto
+            */
+            axios.get(`http://localhost:3001/api/categories`)
+                .then(data => {
+                    var results = data.data.resultados;
+                    var arr = [];
+                    //recorro el array que quedo guardado en la variable 'results' para poder pushear a la variable 'arr' solo el id de la categoria
+                    for (let i = 0; i < results.length; i++) {
+                        if( nuevoName === results[i].name ) {
+                            arr.push(results[i].id)
+                        }
+                    }
+                    return arr
+                })
+                .then(name => {
+                    const prods = axios.get(`https://api.mercadolibre.com/sites/MLA/search?category=${name}`)
+                    return prods
+                }).then(products => {
+                    var results = products.data.results;
+                    var arr = [];
+                    for (let i = 0; i < results.length; i++) {
+                        arr.push({
+                            id: results[i].id,
+                            image: results[i].thumbnail,
+                            name: results[i].title,
+                            price: results[i].price,
+                            stock: results[i].available_quantity,
+                            sold: results[i].sold_quantity,
+                            condition: results[i].condition
+                        })
+                    };
+
+                    var cache = {
+                        resultados: arr
+                    }
+
+                    client.setex(name, 8000, JSON.stringify(cache));
+
+                    res.json({
+                        resultados: arr
+                    })
+                }).catch(err => {
+                    console.log('/categories/:name ERROR: ', err)
+                })           
+        }
+    })
 })
 
 
