@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Cards from './Cards';
+import PieDePagina from '../PieDePagina';
 
 export function SearchProductsCategories({ name, funcion, prods }) {
 
@@ -10,6 +11,7 @@ export function SearchProductsCategories({ name, funcion, prods }) {
     return (
         <div>
             <Cards products={prods} />
+            <PieDePagina />
         </div>
     )
 }

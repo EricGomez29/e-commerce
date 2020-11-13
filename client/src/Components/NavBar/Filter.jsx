@@ -1,4 +1,5 @@
 import React from 'react';
+import PieDePagina from '../PieDePagina';
 import Cards from '../Productos/Cards';
 
 export function OrdenarPrecioDes({ products, categ }) {
@@ -16,10 +17,10 @@ export function OrdenarPrecioDes({ products, categ }) {
             }
             return 0;
         })
-
         return (
             <div>
                 <Cards products={arr1} />
+                <PieDePagina />
             </div>
         )
     }
@@ -34,10 +35,10 @@ export function OrdenarPrecioDes({ products, categ }) {
         }
         return 0;
     })
-
     return (
         <div>
             <Cards products={arr} />
+            <PieDePagina />
         </div>
     )
 }
@@ -57,10 +58,10 @@ export function OrdenarPrecioAsc({ products, categ }) {
             }
             return 0;
         })
-
         return (
             <div>
                 <Cards products={arr1} />
+                <PieDePagina />
             </div>
         )
     }
@@ -75,10 +76,10 @@ export function OrdenarPrecioAsc({ products, categ }) {
         }
         return 0;
     })
-
     return (
         <div>
             <Cards products={arr} />
+            <PieDePagina />
         </div>
     )
 }
@@ -88,10 +89,10 @@ export function OrdenarNuevos({ products, categ }) {
         var arr1 = categ.filter( p => {
             return (p.condition === "new")
         })
-    
         return (
             <div>
                 <Cards products={arr1} />
+                <PieDePagina />
             </div>
         )
     }
@@ -99,10 +100,10 @@ export function OrdenarNuevos({ products, categ }) {
     var arr = products.filter( p => {
         return (p.condition === "new")
     })
-
     return (
         <div>
             <Cards products={arr} />
+            <PieDePagina />
         </div>
     )
 }
@@ -112,20 +113,20 @@ export function OrdenarUsados({ products, categ }) {
         var arr1 = categ.filter( p => {
             return (p.condition === "used")
         })
-        
         return (
             <div>
                 <Cards products={arr1} />
+                <PieDePagina />
             </div>
         )
     }
     var arr = products.filter( p => {
         return (p.condition === "used")
     })
-    
     return (
         <div>
             <Cards products={arr} />
+            <PieDePagina />
         </div>
     )
 }

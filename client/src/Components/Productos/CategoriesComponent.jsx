@@ -1,8 +1,7 @@
-import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { SearchProductsCategories } from './CategoryFilter';
 import { NavLink } from 'react-router-dom';
+import PieDePagina from '../PieDePagina';
 
 export default function Categorias() {
     const [data, setData] = useState( [] );
@@ -16,12 +15,12 @@ export default function Categorias() {
 
     return (
         <div>
-            <div class="jumbotron">
-                <h1 class="display-3">Categorias</h1>
-                <p class="lead">En este sector puedes seleccionar la categoría del producto que estas buscando</p>
-                <hr class="my-4" />
-                <div class="dropdown">
-                <div class="form-group">
+            <div className="jumbotron">
+                <h1 className="display-3">Categorias</h1>
+                <p className="lead">En este sector puedes seleccionar la categoría del producto que estas buscando</p>
+                <hr className="my-4" />
+                <div className="dropdown">
+                <div className="form-group">
                     {
                         data.map(p => {
                             return (
@@ -34,6 +33,7 @@ export default function Categorias() {
                 </div>
                 </div>
             </div>
+            <PieDePagina />
         </div>
     )
 }

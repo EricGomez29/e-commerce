@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import style from '../Styles/Home.module.css';
 import fondo from '../img/fondo-madera.jpg'
+import PieDePagina from './PieDePagina';
 
 export default function Home() {
 
@@ -15,11 +16,12 @@ export default function Home() {
                     <h1 className="display-3 bg-secondary">Bienvenido y gracias por visitar nuestra pagina!</h1>
                 </div>
                 <hr className="my-4" />
-                <p className="bg-secondary" >Puedes comenzar a buscar tus productos, marcas o más mediante la seccion de categorias o simplemente buscarlas, asi de simple !</p>
+                <p className="bg-secondary" >Puedes comenzar a buscar tus productos, marcas o más mediante la seccion de categorias o simplemente utilizar la barra de busqueda, asi de simple !</p>
                 <p className="lead bg-secondary">
                     <NavLink className="btn btn-primary btn-lg" to='/products/categories' role="button" style={{width: "100%"}}>Ver categorias</NavLink>
                 </p>
             </div>
+            <PieDePagina />
         </div>
     )
 }

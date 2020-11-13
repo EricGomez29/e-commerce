@@ -10,6 +10,7 @@ import Filter from './Components/NavBar/FilterComponent';
 import Categorias from './Components/Productos/CategoriesComponent';
 import './App.css';
 import About from './Components/About';
+import PieDePagina from './Components/PieDePagina';
 
 function App() {
   const [resultados, setResultados] = useState([]);
@@ -34,9 +35,10 @@ function App() {
       <div className="App">
         <Route exact path='/' render = {() => <Home /> }/>
         <Route exact path='/about' render = {() => <About /> }/>
-        <Route exact path='/products/categories' render = {() => <Categorias /> }/>
+        <Route exact path='/products/categories' render = {() => <Categorias />}/>
         <Route path='/products/search' render = {() => <Filter />}/>
         <Route exact path='/products/search' render = {() => <Cards products={resultados}/>}/>
+        <Route exact path='/products/search' render = {() => <PieDePagina />}/>
         <Route exact path={`/products/search/category/:name`} render ={({ match }) => <SearchProductsCategories name={match.params.name} funcion={searchCategory} prods={data} />}/>
         <Route exact path='/products/search/filter-price-des' render = {() => <OrdenarPrecioDes products={resultados} categ={data}/> }/>
         <Route exact path='/products/search/filter-price-asc' render = {() => <OrdenarPrecioAsc products={resultados} categ={data}/> }/>

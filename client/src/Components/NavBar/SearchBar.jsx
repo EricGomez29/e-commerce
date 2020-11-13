@@ -18,7 +18,7 @@ export default function SearchBar({ onSearch }) {
                 value={data} 
                 onChange={e => setData(e.target.value)}
                 />
-            <input className="btn btn-success my-2 my-sm-0" type="submit" value="Buscar" />
+            <input className="btn btn-info my-2 my-sm-0" type="submit" value="Buscar" />
         </form>
     )
 }

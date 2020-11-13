@@ -8,7 +8,7 @@ export default function ProductCard({ key, id, image, name, price, condition, st
         return (
             <div key={key} className={style.productCard}>
                 <div className="card" style={{ width: "250px", height: "400px", alignItems: "center" }} >
-                    <NavLink to={`/producto/${id}`} style={{ textDecoration: 'none' }}>
+                    <NavLink to={`/product/${id}`} style={{ textDecoration: 'none' }}>
                         <div style={{display: "flex", justifyContent: "center", paddingTop: "10px"}}>
                             <img src={image} style={{ maxWidth: "240px", height: "200px" }} alt="Producto" />
                         </div>
@@ -29,7 +29,7 @@ export default function ProductCard({ key, id, image, name, price, condition, st
         return (
             <div className={style.productCard}>
                 <div className="card" style={{ width: "250px", height: "400px", alignItems: "center" }} >
-                    <NavLink to={`/producto/${id}`} style={{ textDecoration: 'none' }}>
+                    <NavLink to={`/product/${id}`} style={{ textDecoration: 'none' }}>
                         <div style={{display: "flex", justifyContent: "center", paddingTop: "10px"}}>
                             <img src={image} style={{ maxWidth: "240px", height: "200px" }} alt="Producto" />
                         </div>

@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 
-export default function Filter({ products }) {
-    const [data, setData] = useState( products );
+export default function Filter() {
 
     return(
         <div style={{backgroundColor: "grey", marginTop: "75px", marginBottom: "-100px"}}>
