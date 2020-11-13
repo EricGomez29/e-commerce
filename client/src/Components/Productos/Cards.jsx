@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState } from 'react';
 import ProductCard from './ProductCard.jsx';
 import style from '../../Styles/ProductCard.module.css';
 import Pagination from './Pagination';

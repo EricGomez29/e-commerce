@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PieDePagina from '../PieDePagina';
 
 export default function Categorias() {
@@ -24,9 +24,9 @@ export default function Categorias() {
                     {
                         data.map(p => {
                             return (
-                                <NavLink to={`/products/search/category/${p.name}`}>
+                                <Link to={`/products/search/category/${p.name}`}>
                                     <button className="btn btn-outline-primary btn-sm" style={{margin: "5px"}}>{p.name}</button>
-                                </NavLink>
+                                </Link>
                             )
                         })
                     }
