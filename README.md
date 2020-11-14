@@ -12,7 +12,7 @@ Este proyecto fue creado durante el periodo de tiempo cursado en el bootcamp lla
 El proyecto esta realizado con redis por lo tanto es necesario tener instalado en nuestra computadora [REDIS](https://redis.io/) y tener conocimientos de como ejecutar un servidor en nuestra computadora de manera local, ya que este mismo se utiliza para hacer el método de caching para así poder hayar productos anteriormente buscados por nosotros mucho más rápido.
 
 
->Una vez instalado redis procedemos a clonar el repositorio con un 'Git clone https://github.com/EricGomez29/e-commerce.git' en una carpeta que quisieras tener el proyecto desde tu terminal o simplemente descargarlo como .ZIP.
+>Una vez instalado redis procedemos a clonar el repositorio con un 'git clone https://github.com/EricGomez29/e-commerce.git' en una carpeta que quisieras tener el proyecto desde tu terminal o simplemente descargarlo como .ZIP.
 
 >Luego abrimos la carpeta en la que se encuentra el proyecto desde su editor de codigo preferido como por ejemplo [Visual Studio Code](https://code.visualstudio.com/), una vez abierto desde el editor de codigo procedemos a hacer lo siguiente: 
 
