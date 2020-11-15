@@ -23,4 +23,13 @@ El proyecto esta realizado con redis por lo tanto es necesario tener instalado e
 ## ¿Cómo funciona?
 
 Para poder entender como esta funcionando todo es necesario entender que este proyecto esta realizado con un Back-end y un Front-end de manera básica, al realizar una búsquedad desde la barra de búsqueda hacemos una peticion a nuestro back-end que se encarga de realizar la peticion a la API de Mercado Libre mientras que al mismo tiempo esta guardando nuestra busquedad en el cache realizado con Redis que anteriormente mencionamos.
+Al instante desde nuestro Front-end podemos visualizar las tarjetas de productos encontradas con sus detalles, la aplicación cuenta con un filtrado para poder ordenar los productos encontrados por su condicion, ya sean nuevos o usados y tambien con un filtrado de precios tanto ascendente como descendentes.
+
+Si surge algún problema o tiene dudas, puede contactarme desde LinkedIn o Mi mail de contacto que dejo a continuación:
+
+> LinkedIn: https://www.linkedin.com/in/eric-gomez-a3431a1b1/
+
+> Email: eric.gomez.unq@gmail.com
+
+
 
