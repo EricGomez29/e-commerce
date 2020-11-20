@@ -14,15 +14,15 @@ import PieDePagina from './Components/PieDePagina';
 
 function App() {
   const [resultados, setResultados] = useState([]);
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
   async function searchCategory(name) {
-    if(name === "palabraClave") {
-      setData([])
-    }
+    // if(name === "palabraClave") {
+    //   setData([])
+    // }
     const results = await axios.get(`http://localhost:3001/api/categories/${name}`)
-    setData(results.data.resultados)
-    setResultados([])
+    setResultados(results.data.resultados)
+    // setResultados([])
   } 
 
   function onSearch(products) {
@@ -31,13 +31,13 @@ function App() {
     } else {
       axios.get(`http://localhost:3001/api/search?q=${products}`)
         .then(data => {
-          var respuestas = data.data.resultados
+          var respuestas = data.data.resultados;
           setResultados(respuestas)
           if(respuestas.length === 0) {
             setResultados('nada')
           }
         })
-      setData([])
+      // setData([])
     }
   }
 
@@ -51,11 +51,11 @@ function App() {
         <Route path='/products/search' render = {() => <Filter />}/>
         <Route exact path='/products/search' render = {() => <Cards products={resultados}/>}/>
         <Route exact path='/products/search' render = {() => <PieDePagina />}/>
-        <Route exact path={`/products/search/category/:name`} render ={({ match }) => <SearchProductsCategories name={match.params.name} funcion={searchCategory} prods={data} />}/>
-        <Route exact path='/products/search/filter-price-des' render = {() => <OrdenarPrecioDes products={resultados} categ={data}/> }/>
-        <Route exact path='/products/search/filter-price-asc' render = {() => <OrdenarPrecioAsc products={resultados} categ={data}/> }/>
-        <Route exact path='/products/search/filter-condition-new' render = {() => <OrdenarNuevos products={resultados} categ={data}/> }/>
-        <Route exact path='/products/search/filter-condition-used' render = {() => <OrdenarUsados products={resultados} categ={data}/> }/>
+        <Route exact path={`/products/search/category/:name`} render ={({ match }) => <SearchProductsCategories name={match.params.name} funcion={searchCategory} prods={resultados} />}/>
+        <Route exact path='/products/search/filter-price-des' render = {() => <OrdenarPrecioDes products={resultados} /*categ={data}*//> }/>
+        <Route exact path='/products/search/filter-price-asc' render = {() => <OrdenarPrecioAsc products={resultados} /*categ={data}*//> }/>
+        <Route exact path='/products/search/filter-condition-new' render = {() => <OrdenarNuevos products={resultados} /*categ={data}*//> }/>
+        <Route exact path='/products/search/filter-condition-used' render = {() => <OrdenarUsados products={resultados} /*categ={data}*//> }/>
       </div>
     </BrowserRouter>
   );
