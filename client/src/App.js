@@ -33,9 +33,6 @@ function App() {
         .then(data => {
           var respuestas = data.data.resultados
           setResultados(respuestas)
-          return respuestas
-        }).then(respuestas => {
-          console.log(respuestas.length)
           if(respuestas.length === 0) {
             setResultados('nada')
           }
