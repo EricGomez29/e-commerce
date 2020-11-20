@@ -6,7 +6,8 @@ const REDIS_PORT = process.env.PORT || 6379
 const client = redis.createClient(REDIS_PORT)
 
 server.get('/search', (req, res) => {                                   //BUSCA PRODUCTOS Y GUARDA EN CACHE
-    const query = req.query.q;
+    const notQuery = req.query.q;
+    var query = notQuery.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); //---> Saco caracteres especiales como la Ñ o tildes, sino axios me tira un error.
     //creacion de CACHE con redis
     client.get(query, (err, data) => {
         /*
@@ -56,7 +57,7 @@ server.get('/search', (req, res) => {                                   //BUSCA 
                         resultados: arr
                     })
                 }).catch(err => {
-                    console.log(err);
+                    console.log('Error: ', err);
                     res.status(404).send('Internal Error')
                 })
         }

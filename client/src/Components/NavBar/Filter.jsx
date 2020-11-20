@@ -109,10 +109,12 @@ export function OrdenarNuevos({ products, categ }) {
 }
 
 export function OrdenarUsados({ products, categ }) {
-    if(categ.length !== 0) {
-        var arr1 = categ.filter( p => {
-            return (p.condition === "used")
-        })
+    var arr1 = categ.filter( p => {
+        return (p.condition === "used")
+    })
+
+    if(arr1.length !== 0) {
+        console.log('entro aca')
         return (
             <div>
                 <Cards products={arr1} />
@@ -120,9 +122,21 @@ export function OrdenarUsados({ products, categ }) {
             </div>
         )
     }
+
     var arr = products.filter( p => {
         return (p.condition === "used")
     })
+
+    if(arr.length === 0) {
+        var empty = "vacio"
+        return (
+            <div>
+                <Cards products={arr} empty={empty} />
+                <PieDePagina />
+            </div>
+        )
+    }
+
     return (
         <div>
             <Cards products={arr} />

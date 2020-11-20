@@ -3,10 +3,12 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import PieDePagina from '../PieDePagina';
 
-export default function Categorias() {
+export default function Categorias({ funcion }) {
     const [data, setData] = useState( [] );
 
+
     useEffect(() => {
+        funcion("palabraClave")
         axios.get(`http://localhost:3001/api/categories`)
             .then(data => {
                 setData(data.data.resultados)

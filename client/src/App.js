@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Route } from "react-router-dom";
 import { SearchProductsCategories } from './Components/Productos/CategoryFilter';
 import { OrdenarPrecioDes, OrdenarPrecioAsc, OrdenarNuevos, OrdenarUsados } from './Components/NavBar/Filter';
@@ -17,16 +17,31 @@ function App() {
   const [data, setData] = useState([]);
 
   async function searchCategory(name) {
+    if(name === "palabraClave") {
+      setData([])
+    }
     const results = await axios.get(`http://localhost:3001/api/categories/${name}`)
     setData(results.data.resultados)
     setResultados([])
   } 
 
-
-  async function onSearch(products) {
-    const result = await axios.get(`http://localhost:3001/api/search?q=${products}`)
-    setResultados(result.data.resultados)
-    setData([])
+  function onSearch(products) {
+    if(products === "palabraClave") {
+      setResultados('buscando')
+    } else {
+      axios.get(`http://localhost:3001/api/search?q=${products}`)
+        .then(data => {
+          var respuestas = data.data.resultados
+          setResultados(respuestas)
+          return respuestas
+        }).then(respuestas => {
+          console.log(respuestas.length)
+          if(respuestas.length === 0) {
+            setResultados('nada')
+          }
+        })
+      setData([])
+    }
   }
 
   return (
@@ -35,7 +50,7 @@ function App() {
       <div className="App">
         <Route exact path='/' render = {() => <Home /> }/>
         <Route exact path='/about' render = {() => <About /> }/>
-        <Route exact path='/products/categories' render = {() => <Categorias />}/>
+        <Route exact path='/products/categories' render = {() => <Categorias funcion={searchCategory}/>}/>
         <Route path='/products/search' render = {() => <Filter />}/>
         <Route exact path='/products/search' render = {() => <Cards products={resultados}/>}/>
         <Route exact path='/products/search' render = {() => <PieDePagina />}/>
