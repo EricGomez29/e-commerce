@@ -9,7 +9,7 @@ export default function SearchBar({ onSearch }) {
         <form className="form-inline my-2 my-lg-0"
             onSubmit={(e) => {
                 e.preventDefault();
-                onSearch("palabraClave");
+                onSearch(true)
                 onSearch(data); 
                 history.push('/products/search');
             }}>

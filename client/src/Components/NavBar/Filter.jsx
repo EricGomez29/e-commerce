@@ -3,27 +3,6 @@ import PieDePagina from '../PieDePagina';
 import Cards from '../Productos/Cards';
 
 export function OrdenarPrecioDes({ products, categ }) {
-    // if(categ.length !== 0) {
-    //     console.log(categ.length)
-    //     console.log('entro')
-    //     var arr1 = categ.sort((a, b) => {
-    //         const precioA = a.price;
-    //         const precioB = b.price;
-    //         if(precioA < precioB) {
-    //             return -1;
-    //         }
-    //         if(precioA > precioB) {
-    //             return 1;
-    //         }
-    //         return 0;
-    //     })
-    //     return (
-    //         <div>
-    //             <Cards products={arr1} />
-    //             <PieDePagina />
-    //         </div>
-    //     )
-    // }
     var arr = products.sort((a, b) => {
         const precioA = a.price;
         const precioB = b.price;
@@ -44,27 +23,6 @@ export function OrdenarPrecioDes({ products, categ }) {
 }
 
 export function OrdenarPrecioAsc({ products, categ }) {
-    // if(categ.length !== 0) {
-    //     console.log(categ.length)
-    //     console.log('entro')
-    //     var arr1 = categ.sort((a, b) => {
-    //         const precioA = a.price;
-    //         const precioB = b.price;
-    //         if(precioA > precioB) {
-    //             return -1;
-    //         }
-    //         if(precioA < precioB) {
-    //             return 1;
-    //         }
-    //         return 0;
-    //     })
-    //     return (
-    //         <div>
-    //             <Cards products={arr1} />
-    //             <PieDePagina />
-    //         </div>
-    //     )
-    // }
     var arr = products.sort((a, b) => {
         const precioA = a.price;
         const precioB = b.price;
@@ -85,18 +43,6 @@ export function OrdenarPrecioAsc({ products, categ }) {
 }
 
 export function OrdenarNuevos({ products, categ }) {
-    // var arr1 = categ.filter( p => {
-    //     return (p.condition === "new")
-    // })
-    // if(arr1.length !== 0) {
-    //     return (
-    //         <div>
-    //             <Cards products={arr1} />
-    //             <PieDePagina />
-    //         </div>
-    //     )
-    // }
-
     var arr = products.filter( p => {
         return (p.condition === "new")
     })
@@ -120,19 +66,6 @@ export function OrdenarNuevos({ products, categ }) {
 }
 
 export function OrdenarUsados({ products, categ }) {
-    // var arr1 = categ.filter( p => {
-    //     return (p.condition === "used")
-    // })
-
-    // if(arr1.length !== 0) {
-    //     return (
-    //         <div>
-    //             <Cards products={arr1} />
-    //             <PieDePagina />
-    //         </div>
-    //     )
-    // }
-
     var arr = products.filter( p => {
         return (p.condition === "used")
     })
