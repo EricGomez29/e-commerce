@@ -11,9 +11,12 @@ import Categorias from './Components/Productos/CategoriesComponent';
 import './App.css';
 import About from './Components/About';
 import PieDePagina from './Components/PieDePagina';
+import Product from './Components/Productos/Product';
+import Carrusel from './Components/Productos/Carrousel';
 
 function App() {
   const [resultados, setResultados] = useState([]);
+  const [productInfo, setProductInfo] = useState([]);
 
   async function searchCategory(name) {
     const results = await axios.get(`http://localhost:3001/api/categories/${name}`)
@@ -35,14 +38,25 @@ function App() {
     }
   }
 
+  async function productData(id, second) {
+    if(second === true) {
+      setProductInfo('buscando')
+    }
+    const result = await axios.get(`http://localhost:3001/api/product/${id}`)
+    var producto = result.data.producto[0]
+    setProductInfo(producto)
+  }
+
   return (
     <BrowserRouter >
+      <Route exact path='/carrusel' render={() => <Carrusel productos={productInfo}/>}/>
       <NavBar onSearch={onSearch}/>
       <div className="App">
+        <Route path='/products/search' render = {() => <Filter />}/>
         <Route exact path='/' render = {() => <Home /> }/>
         <Route exact path='/about' render = {() => <About /> }/>
+        <Route exact path={`/product/:id`} render = {({match}) => <Product id={match.params.id} funcion={productData} prod={productInfo} />}/>
         <Route exact path='/products/categories' render = {() => <Categorias funcion={searchCategory}/>}/>
-        <Route path='/products/search' render = {() => <Filter />}/>
         <Route exact path='/products/search' render = {() => <Cards products={resultados}/>}/>
         <Route exact path='/products/search' render = {() => <PieDePagina />}/>
         <Route exact path={`/products/search/category/:name`} render ={({ match }) => <SearchProductsCategories name={match.params.name} funcion={searchCategory} prods={resultados} />}/>

@@ -158,5 +158,47 @@ server.get('/categories/:name', (req, res) => {                         //BUSCA 
     })
 })
 
+server.get('/product/:id', (req, res) => {
+    const id = req.params.id
+    client.get(id, (err, data) => {
+        if(data !== null) {
+            var cache = JSON.parse(data)
+            res.json({
+                producto: cache.producto
+            })
+        } else {
+            axios.get(`https://api.mercadolibre.com/items/${id}`)
+                .then(data => {
+                    var result = data.data;
+                    console.log(result)
+                    var product = [{
+                        id: result.id,
+                        name: result.title,
+                        price: result.price,
+                        stock: result.available_quantity,
+                        sold: result.sold_quantity,
+                        currency: result.currency_id,
+                        condition: result.condition,
+                        link: result.permalink,
+                        address: result.seller_address,
+                        warranty: result.warranty,
+                        images: []
+                    }];
+                    // var imagenes = []
+                    for (let i = 0; i < result.pictures.length; i++) {
+                        product[0].images.push(result.pictures[i].url)
+                    }
+                    // product.push(images)
+                    return product;
+                }).then(product => {
+                    var resp = {
+                        producto: product
+                    }
+                    client.setex(id, 3600, JSON.stringify(resp))
+                    res.json(resp)
+                })
+        }
+    })
+})
 
 module.exports = server;

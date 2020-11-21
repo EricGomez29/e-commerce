@@ -9,7 +9,6 @@ export default function Catalogo({ products, empty }) {
     const productos = 20;                      // productos q van a ver por pagina (hay q cambiarlo)
     
     if(products === 'nada') {
-        console.log('entro a -nada-')
         return (
             <div style={{marginTop: "150px", marginBottom: "800px"}}>
                 <h1 style={{paddingBottom: "10px"}}>
