@@ -39,6 +39,7 @@ server.get('/search', (req, res) => {                                   //BUSCA 
                             image: results[i].thumbnail,
                             name: results[i].title,
                             price: results[i].price,
+                            currency: results[i].currency_id,
                             stock: results[i].available_quantity,
                             sold: results[i].sold_quantity,
                             condition: results[i].condition
@@ -123,8 +124,7 @@ server.get('/categories/:name', (req, res) => {                         //BUSCA 
                         }
                     }
                     return arr
-                })
-                .then(name => {
+                }).then(name => {
                     const prods = axios.get(`https://api.mercadolibre.com/sites/MLA/search?category=${name}`)
                     return prods
                 }).then(products => {
@@ -158,7 +158,7 @@ server.get('/categories/:name', (req, res) => {                         //BUSCA 
     })
 })
 
-server.get('/product/:id', (req, res) => {
+server.get('/product/:id', (req, res) => {                              //VER LA INFORMACION DE UN PRODUCTO
     const id = req.params.id
     client.get(id, (err, data) => {
         if(data !== null) {
@@ -184,11 +184,9 @@ server.get('/product/:id', (req, res) => {
                         warranty: result.warranty,
                         images: []
                     }];
-                    // var imagenes = []
                     for (let i = 0; i < result.pictures.length; i++) {
                         product[0].images.push(result.pictures[i].url)
                     }
-                    // product.push(images)
                     return product;
                 }).then(product => {
                     var resp = {

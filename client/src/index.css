@@ -11,3 +11,28 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.carousel * {
+  background: white;
+}
+
+.carousel li.slide img {
+  height: 350px;
+}
+
+.carousel li img {
+  border: 1px solid black;
+  height: 80px;
+}
+
+.carousel .control-dots {
+  background: transparent;
+}
+
+.carousel .thumbs {
+  overflow-x: auto;
+}
+
+.carousel.carousel-slider .control-arrow {
+  display: none;
+}
